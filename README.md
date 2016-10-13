@@ -30,5 +30,3 @@ More info about Singleton -> https://en.wikipedia.org/wiki/Singleton_pattern
 ## Authors
 
 * **Niki Izvorski ** - *Initial work*
-
-* **http://bigocheatsheet.com/ ** - *Providing the Sheets*
