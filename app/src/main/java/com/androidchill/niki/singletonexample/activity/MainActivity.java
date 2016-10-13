@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Set SharedPrefs for the User
         sharedpreferences = getSharedPreferences(gamePrefs, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
+        final SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putString(username, Singleton.getInstance().getUser().getName());
         editor.putString(score, Singleton.getInstance().getUser().getScore());
         editor.apply();
@@ -87,32 +87,27 @@ public class MainActivity extends AppCompatActivity {
         timerStart();
 
         //Replay Button
-        replay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                timerStart();
-                submit.setClickable(true);
-                replay.setVisibility(View.INVISIBLE);
-            }
+
+        replay.setOnClickListener(v -> {
+            timerStart();
+            submit.setClickable(true);
+            replay.setVisibility(View.INVISIBLE);
         });
 
         //Submit UserInput button
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        submit.setOnClickListener(v -> {
 
-                //get user data from the editText
-                final String data = editText.getText().toString().trim();
+            //get user data from the editText
+            final String data = editText.getText().toString().trim();
 
-                if(TextUtils.isEmpty(data)){
-                    //editText.setError(getString(R.string.no_text_error));
-                    // Perform animation
-                    imageView.startAnimation(shakeWrong);
-                } else {
-                    // Perform animation
-                    imageView.startAnimation(shake);
-                    setResults(data);
-                }
+            if(TextUtils.isEmpty(data)){
+                //editText.setError(getString(R.string.no_text_error));
+                // Perform animation
+                imageView.startAnimation(shakeWrong);
+            } else {
+                // Perform animation
+                imageView.startAnimation(shake);
+                setResults(data);
             }
         });
     }
