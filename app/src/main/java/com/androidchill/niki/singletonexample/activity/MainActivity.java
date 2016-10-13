@@ -1,7 +1,9 @@
-package com.androidchill.niki.singletonexample;
+package com.androidchill.niki.singletonexample.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.androidchill.niki.singletonexample.R;
 
 public class MainActivity extends AppCompatActivity {
 

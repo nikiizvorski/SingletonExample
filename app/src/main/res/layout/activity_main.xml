@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -8,10 +9,72 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.androidchill.niki.singletonexample.MainActivity">
+    android:background="@color/colorBackground"
+    tools:context="com.androidchill.niki.singletonexample.activity.MainActivity">
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:digits="0,1,2,3,4,5,6,7,8,9,*,qwertzuiopasdfghjklyxcvbnm"
+        android:hint="Enter a word"
+        android:ellipsize="start"
+        android:background="@android:drawable/editbox_background_normal"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="@color/colorBackground"
+        android:textColorHint="@color/colorBackground"
+        android:gravity="center"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="11dp"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="SUBMIT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/greena"
+        android:textColor="@color/colorBackground"
+        android:id="@+id/button"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Play/Retry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:background="@color/greena"
+        android:textColor="@color/colorBackground"
+        android:id="@+id/button2"
+        android:layout_below="@+id/button"
+        android:layout_alignStart="@+id/button"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="@string/gamewords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textSize="17sp"
+        android:textColor="@color/greena"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@+id/editText"
+        android:layout_alignStart="@+id/button" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/gameofword"
+        android:id="@+id/imageView"
+        android:scaleType="fitStart"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="29dp" />
+
 </RelativeLayout>

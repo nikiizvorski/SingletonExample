@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">SingletonExample</string>
+    <string name="app_name">GameOfWords</string>
+    <string name="error_ok">Ok</string>
+    <string name="gamewords">Find the word in the sentence: areallylongword</string>
+    <string name="gameOver">Game Over!</string>
+    <string name="no_text_error">Empty, please add some word</string>
 </resources>
