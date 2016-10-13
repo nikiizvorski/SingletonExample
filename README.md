@@ -7,8 +7,6 @@ Application Creation showing the User a SplashScreen in the middle of PreviewCla
 the user is waiting on a splash screen against using that inside of AsyncTask. And Loading all the massive data inside of a HashMap
 then passing the instance of the Singleton class in the needed activity.
 
-![Alt text](http://i1.wp.com/idiotechie.com/wp-content/uploads/2012/02/Singleton_Implementation.jpg "Data Structures")
-
 ## Getting Started
 
 You will have to download the project and run it on your local machine.
