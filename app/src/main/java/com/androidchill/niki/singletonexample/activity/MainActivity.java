@@ -86,15 +86,14 @@ public class MainActivity extends AppCompatActivity {
         //Set the Timer
         timerStart();
 
-        //Replay Button
-
+        //Replay Button Lambda
         replay.setOnClickListener(v -> {
             timerStart();
             submit.setClickable(true);
             replay.setVisibility(View.INVISIBLE);
         });
 
-        //Submit UserInput button
+        //Submit UserInput button Lambda
         submit.setOnClickListener(v -> {
 
             //get user data from the editText
