@@ -21,40 +21,49 @@ import com.androidchill.niki.singletonexample.model.Singleton;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
+
+    //Set SharedPreferences
+    public static final String gamePrefs = "Game";
+    public static final String username = "username";
+    public static final String score = "0";
 
     //FORMAT for the CountDownTimer
     private static final String FORMAT = "%02d:%02d:%02d";
 
     //SharePreferences SetUp
     SharedPreferences sharedpreferences;
-    public static final String gamePrefs = "Game";
-    public static final String username = "username";
-    public static final String score = "0";
 
-    //Set User
+    //Set the GameObject
     Singleton object = Singleton.getInstance();
 
     //Variable for Score
     int foundmatch = 0;
 
-    //Not using Butterknife since we can't change the package.
-    Button submit, replay;
+    //Butterknife
+    @BindView(R.id.button)
+    Button submit;
+    @BindView(R.id.button2)
+    Button replay;
+    @BindView(R.id.editText)
     EditText editText;
+    @BindView(R.id.imageView)
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Set Timer Toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
-        //set the view since we can't use butterknife since
-        // the package name starts with android or java
-        submit = (Button) findViewById(R.id.button);
-        replay = (Button) findViewById(R.id.button2);
-        editText = (EditText) findViewById(R.id.editText);
+        //set Butterknife
+        ButterKnife.bind(this);
 
         //Add Visibility to the replay button
         replay.setVisibility(View.INVISIBLE);
@@ -67,15 +76,12 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
 
         //Welcome MSG from Singleton :)
-
         String msg = Singleton.getInstance().getString();
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
+        //Add Animations with AnimationUtils and XML
         final Animation shakeWrong = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_wrong);
         final Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
-        // View element to be shake
-        final ImageView imageView = (ImageView) findViewById(R.id.imageView);
-
 
         //Set the Timer
         timerStart();
@@ -95,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 //get user data from the editText
                 final String data = editText.getText().toString().trim();
 
@@ -110,35 +115,37 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void setResults(String data) {
-        if(object.getCharCount().containsKey(data.charAt(0))){
+        if (object.getCharCount().containsKey(data.charAt(0))) {
             Toast.makeText(MainActivity.this, "KEY IN SINGLETON!", Toast.LENGTH_SHORT).show();
             ArrayList<String> list = object.getCharCount().get(data.charAt(0));
-            //Toast.makeText(MainActivity.this, list + " ", Toast.LENGTH_SHORT).show();
-            if(list.contains(data.trim())){
-                Toast.makeText(MainActivity.this, "KEY FOUND WORD TOO!", Toast.LENGTH_SHORT).show();
-                //add variable for the score
-                foundmatch++;
-
-                //store the score
-                String scored = String.valueOf(foundmatch);
-
-                //Actual Score of real user
-                object.getUser().setScore(scored);
-
-                //store the user data in the sharedpreferences
-                SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.putString(username, object.getUser().getName());
-                editor.putString(score, object.getUser().getScore());
-                editor.apply();
-            } else {
-                Toast.makeText(MainActivity.this, "KEY FOUND BUT NO WORD", Toast.LENGTH_SHORT).show();
-            }
+            checkContains(data, list);
         } else {
             Toast.makeText(MainActivity.this, "NO KEY IN SINGLETON!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void checkContains(String data, ArrayList<String> list) {
+        if(list.contains(data.trim())){
+            Toast.makeText(MainActivity.this, "KEY FOUND WORD TOO!", Toast.LENGTH_SHORT).show();
+            //add variable for the score
+            foundmatch++;
+
+            //store the score
+            String scored = String.valueOf(foundmatch);
+
+            //Actual Score of real user
+            object.getUser().setScore(scored);
+
+            //store the user data in the sharedpreferences
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putString(username, object.getUser().getName());
+            editor.putString(score, object.getUser().getScore());
+            editor.apply();
+        } else {
+            Toast.makeText(MainActivity.this, "KEY FOUND BUT NO WORD", Toast.LENGTH_SHORT).show();
         }
     }
 
